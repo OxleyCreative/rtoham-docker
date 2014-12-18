@@ -38,4 +38,5 @@ RUN ln -s /home/docker/supervisor-app.conf /etc/supervisor/conf.d/
 RUN pip install -r /home/docker/rtoham.com/requirements.txt
 RUN python /home/docker/rtoham.com/manage.py collectstatic --noinput
 
-CMD ["supervisord", "-n"]
+EXPOSE 8080
+CMD ["supervisord", "--nodaemon", "--logfile=/var/eb-logs/supervisord.log", "--childlogdir=/var/eb-logs"]
