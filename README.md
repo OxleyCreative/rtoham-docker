@@ -53,5 +53,5 @@ Database back-ups can be created in a similar manner.
 Finally, we have a database all set up and we're ready to run the web application using a command like this:
 
 ```
-sudo docker run -d --name rtoham-web --link rtoham-db:mysql -P -v /path/to/logs:/var/app-logs rtoham/web:vX.X.X
+sudo docker run -d --name rtoham-web --link rtoham-db:mysql -e RTOHAM_SECRET_KEY=replace-me -P -v /path/to/logs:/var/app-logs rtoham/web:vX.X.X
 ```
