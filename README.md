@@ -41,10 +41,10 @@ DATABASES = {
 You will need to load data into the container from a back-up using a command like the following:
 
 ```
-sudo docker run -v /path/to/backup-dir:/var/db-backups --link rtoham-db:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -u"$MYSQL_ENV_MYSQL_USER" -p"$MYSQL_ENV_MYSQL_PASSWORD" < /var/db-backups/backup-file.sql'
+sudo docker run -v /path/to/backup-dir:/var/rtoham/db-backups --link rtoham-db:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -u"$MYSQL_ENV_MYSQL_USER" -p"$MYSQL_ENV_MYSQL_PASSWORD" < /var/rtoham/db-backups/backup-file.sql'
 ```
 
-This will run a new container that is linked to the MySQL container that we ran earlier. It has a volume mounted from the host (`/path/to/backup-dir`) to the container (`/var/db-backups`). We use the data back-up within the mounted volume to populate the database.
+This will run a new container that is linked to the MySQL container that we ran earlier. It has a volume mounted from the host (`/path/to/backup-dir`) to the container (`/var/rtoham/db-backups`). We use the data back-up within the mounted volume to populate the database.
 
 Database back-ups can be created in a similar manner.
 
@@ -53,5 +53,5 @@ Database back-ups can be created in a similar manner.
 Finally, we have a database all set up and we're ready to run the web application using a command like this:
 
 ```
-sudo docker run -d --name rtoham-web --link rtoham-db:mysql -e RTOHAM_SECRET_KEY=replace-me -P -v /path/to/logs:/var/app-logs rtoham/web:vX.X.X
+sudo docker run -d --name rtoham-web --link rtoham-db:mysql -e RTOHAM_SECRET_KEY=replace-me -P -v /path/to/logs:/var/rtoham/app-logs rtoham/web:vX.X.X
 ```
