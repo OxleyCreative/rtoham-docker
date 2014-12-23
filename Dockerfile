@@ -39,4 +39,4 @@ RUN pip install -r /home/docker/rtoham.com/requirements.txt
 RUN RTOHAM_SECRET_KEY="temp-key" python /home/docker/rtoham.com/manage.py collectstatic --noinput
 
 EXPOSE 8080
-CMD ["supervisord", "--nodaemon", "--logfile=/var/eb-logs/supervisord.log", "--childlogdir=/var/eb-logs"]
+CMD ["supervisord", "--nodaemon", "--logfile=/var/app-logs/supervisord.log", "--childlogdir=/var/app-logs"]
