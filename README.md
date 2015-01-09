@@ -54,3 +54,23 @@ Finally, we have a database all set up and we're ready to run the web applicatio
 ```
 sudo docker run -d --name rtoham-web --link rtoham-db:mysql -e RTOHAM_SECRET_KEY=replace-me -P -v /path/to/uploads:/var/uploads -v /path/to/logs:/var/rtoham/app-logs rtoham/web:vX.X.X
 ```
+
+### Deploying to Production
+
+Tag the current version of the code:
+
+```
+git tag x.x.x
+```
+
+Push the tags:
+
+```
+git push --tags
+```
+
+Run the deploy script:
+
+```
+./deploy.sh user@hostname x.x.x some-random-key
+```
