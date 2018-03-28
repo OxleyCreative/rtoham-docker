@@ -45,7 +45,11 @@ sudo docker run -v /path/to/backup-dir:/var/rtoham/db-backups --link rtoham-db:m
 
 This will run a new container that is linked to the MySQL container that we ran earlier. It has a volume mounted from the host (`/path/to/backup-dir`) to the container (`/var/rtoham/db-backups`). We use the data back-up within the mounted volume to populate the database.
 
-Database back-ups can be created in a similar manner.
+Database back-ups can be created in a similar manner, like so:
+
+```
+sudo docker run -v /var/rtoham/db-backups:/var/rtoham/db-backups --link rtoham-db:mysql --rm mysql sh -c 'exec mysqldump -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -u"$MYSQL_ENV_MYSQL_USER" -p"$MYSQL_ENV_MYSQL_PASSWORD" "$MYSQL_ENV_MYSQL_DATABASE" > /var/rtoham/db-backups/rtoham_prod-2018-03-27.sql'
+```
 
 ### Run the Web App Container
 
